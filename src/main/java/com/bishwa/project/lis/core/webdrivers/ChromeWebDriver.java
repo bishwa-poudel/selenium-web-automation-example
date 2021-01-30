@@ -17,7 +17,7 @@ public class ChromeWebDriver implements IWebDriver {
     static {
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--window-size=1366,768");
+//        options.addArguments("--headless", "--window-size=1366,768");
 
         chromeDriver = new ChromeDriver(options);
     }

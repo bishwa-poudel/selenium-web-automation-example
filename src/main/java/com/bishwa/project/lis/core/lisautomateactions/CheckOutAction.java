@@ -36,7 +36,7 @@ public class CheckOutAction extends LisAutomateAction {
                 new WebDriverWait(driver, 1).until(ExpectedConditions.alertIsPresent());
 
                 Alert checkOutConfirmationAlert = driver.switchTo().alert();
-                checkOutConfirmationAlert.accept();
+                checkOutConfirmationAlert.dismiss();
 
                 System.out.println("Successfully checked out");
             }

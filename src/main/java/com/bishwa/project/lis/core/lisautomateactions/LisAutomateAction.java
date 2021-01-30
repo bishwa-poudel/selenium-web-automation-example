@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.annotation.PreDestroy;
+import java.util.List;
+
 /**
  * Author: Bishwa
  * Date: 30/01/2021
@@ -21,18 +24,17 @@ public abstract class LisAutomateAction implements IAutomate {
     }
 
     public void execute() {
-        try {
-            login();
-            action();
-        } finally {
-            close();
-        }
+        login();
+        action();
     }
 
     protected abstract void action();
 
     protected void login() {
-        driver.get("http://intranet.lisnepal.com.np/");
+        if(checkIfLoggedIn()) {
+            System.out.println("Already logged in to LIS Intranet");
+           return;
+        }
 
         WebElement userField = driver.findElement(By.id("usr-name"));
         WebElement passwordField = driver.findElement(By.id("usr-password"));
@@ -50,7 +52,17 @@ public abstract class LisAutomateAction implements IAutomate {
         System.out.println("Logged in to LIS Intranet");
     }
 
+    private boolean checkIfLoggedIn() {
+        driver.get("http://login.lisnepal.com.np/home/login");
+
+        List<WebElement> loggedInElements = driver.findElements(By.className("user-name-top"));
+
+        return !loggedInElements.isEmpty();
+    }
+
+    @PreDestroy
     protected void close() {
+        System.out.println("Closing driver connection...");
         driver.quit();
     }
 }
