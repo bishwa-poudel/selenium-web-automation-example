@@ -1,5 +1,7 @@
 package com.bishwa.project.intranetfunction.restful;
 
+import com.bishwa.project.intranetfunction.service.CheckInOutService;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,12 +13,13 @@ import javax.ws.rs.core.Response;
  * Date: 30/01/2021
  * Time: 10:28
  */
-@Path("/")
+@Path("/action")
 public class CheckInOutRestService {
     @GET
     @Path("checkin")
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkIn() {
+        new CheckInOutService().doCheckIn();
         return Response.status(Response.Status.OK).entity("Check in successful").build();
     }
 
@@ -24,6 +27,7 @@ public class CheckInOutRestService {
     @Path("checkout")
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkOut() {
+        new CheckInOutService().doCheckOut();
         return Response.status(Response.Status.OK).entity("Check out successful").build();
     }
 }
