@@ -1,5 +1,6 @@
 package com.bishwa.project;
 
+import com.bishwa.project.lis.core.webdrivers.ChromeWebDriver;
 import com.bishwa.project.scheduler.TaskScheduler;
 
 import javax.servlet.ServletContextEvent;
@@ -21,6 +22,7 @@ public class RequestListener implements ServletContextListener {
         System.out.println("RUNNING POST DEPLOYMENT HOOKS");
 
         taskScheduler.initScheduler();
+        new ChromeWebDriver(); // initializing class will initialize static values once, thereby initializes chrome driver.
     }
 
     @Override
