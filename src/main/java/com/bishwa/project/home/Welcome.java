@@ -20,4 +20,3 @@ public class Welcome {
         return Response.ok("Welcome to LIS Intranet Automation v1.0").build();
     }
 }
-                                                                                                                                                                                                         
