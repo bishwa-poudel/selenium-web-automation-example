@@ -1,4 +1,4 @@
-package com.bishwa.playground;
+package com.bishwa.project.playground;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
