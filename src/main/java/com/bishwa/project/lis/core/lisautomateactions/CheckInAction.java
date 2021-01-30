@@ -1,7 +1,6 @@
-package com.bishwa.project.intranetfunction.implementation.lisautomateactions;
+package com.bishwa.project.lis.core.lisautomateactions;
 
-import com.bishwa.project.intranetfunction.implementation.LisAutomateAction;
-import com.bishwa.project.intranetfunction.specification.IWebDriver;
+import com.bishwa.project.lis.core.specification.IWebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -27,7 +26,7 @@ public class CheckInAction extends LisAutomateAction {
             System.out.println("Checking in to LIS Intranet");
 
             WebElement checkInButton = checkInContainer.get(0);
-            checkInButton.click();
+//            checkInButton.click();
 
             System.out.println("Successfully checked in");
         }

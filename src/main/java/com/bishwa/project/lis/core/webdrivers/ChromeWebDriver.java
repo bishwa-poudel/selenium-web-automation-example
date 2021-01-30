@@ -1,6 +1,6 @@
-package com.bishwa.project.intranetfunction.implementation;
+package com.bishwa.project.lis.core.webdrivers;
 
-import com.bishwa.project.intranetfunction.specification.IWebDriver;
+import com.bishwa.project.lis.core.specification.IWebDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

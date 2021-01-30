@@ -1,4 +1,4 @@
-package com.bishwa.project.home;
+package com.bishwa.project.base;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

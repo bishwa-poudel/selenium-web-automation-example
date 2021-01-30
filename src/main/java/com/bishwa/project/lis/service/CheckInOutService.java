@@ -1,9 +1,9 @@
-package com.bishwa.project.intranetfunction.service;
+package com.bishwa.project.lis.service;
 
-import com.bishwa.project.intranetfunction.implementation.ChromeWebDriver;
-import com.bishwa.project.intranetfunction.implementation.LisAutomateAction;
-import com.bishwa.project.intranetfunction.implementation.lisautomateactions.CheckInAction;
-import com.bishwa.project.intranetfunction.implementation.lisautomateactions.CheckOutAction;
+import com.bishwa.project.lis.core.webdrivers.ChromeWebDriver;
+import com.bishwa.project.lis.core.lisautomateactions.LisAutomateAction;
+import com.bishwa.project.lis.core.lisautomateactions.CheckInAction;
+import com.bishwa.project.lis.core.lisautomateactions.CheckOutAction;
 
 /**
  * Author: Bishwa

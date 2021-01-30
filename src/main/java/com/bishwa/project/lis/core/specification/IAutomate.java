@@ -1,4 +1,4 @@
-package com.bishwa.project.intranetfunction.specification;
+package com.bishwa.project.lis.core.specification;
 
 /**
  * Author: Bishwa

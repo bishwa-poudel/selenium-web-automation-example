@@ -1,6 +1,6 @@
-package com.bishwa.project.intranetfunction.restful;
+package com.bishwa.project.lis.restful;
 
-import com.bishwa.project.intranetfunction.service.CheckInOutService;
+import com.bishwa.project.lis.service.CheckInOutService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

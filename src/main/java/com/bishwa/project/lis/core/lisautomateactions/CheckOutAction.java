@@ -1,7 +1,6 @@
-package com.bishwa.project.intranetfunction.implementation.lisautomateactions;
+package com.bishwa.project.lis.core.lisautomateactions;
 
-import com.bishwa.project.intranetfunction.implementation.LisAutomateAction;
-import com.bishwa.project.intranetfunction.specification.IWebDriver;
+import com.bishwa.project.lis.core.specification.IWebDriver;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
