@@ -1,4 +1,4 @@
-package com.bishwa.project.restful;
+package com.bishwa.project.intranetfunction.restful;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
