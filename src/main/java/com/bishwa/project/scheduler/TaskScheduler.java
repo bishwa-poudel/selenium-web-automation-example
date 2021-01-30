@@ -30,4 +30,14 @@ public class TaskScheduler {
         System.out.println("[TASK-SCHEDULER] TASK SCHEDULER STARTED SUCCESSFULLY");
     }
 
+    public void stopScheduler() {
+        checkInTask.cancel();
+        checkOutTask.cancel();
+
+        timer.cancel(); // Terminates this timer, discarding any currently scheduled tasks.
+        timer.purge();  // Removes all cancelled tasks from this timer's task queue.
+
+        System.out.println("[TASK-SCHEDULER] TASK SCHEDULER STOPPED SUCCESSFULLY");
+    }
+
 }
