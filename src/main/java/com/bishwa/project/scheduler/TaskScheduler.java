@@ -14,7 +14,7 @@ public class TaskScheduler {
     private final static int CHECK_IN_HR = 9;
     private final static int CHECK_IN_OUT_MIN = 30;
     private final static int CHECK_IN_OUT_SEC = 0;
-    private final static int CHECK_OUT_HR = 5;
+    private final static int CHECK_OUT_HR = 17;
     private final static long ONE_DAY_MILIS = 60*60*24*1000;
 
     private final Timer timer = new Timer();
@@ -27,7 +27,8 @@ public class TaskScheduler {
     public void initScheduler() {
         timer.scheduleAtFixedRate(checkInTask, checkInTime, ONE_DAY_MILIS);
         timer.scheduleAtFixedRate(checkOutTask, checkOutTime, ONE_DAY_MILIS);
-        System.out.println("[TASK-SCHEDULER] TASK SCHEDULER STARTED SUCCESSFULLY");
+        System.out.println("[TASK-SCHEDULER] CHECK IN REGISTERED FOR: " + checkInTime);
+        System.out.println("[TASK-SCHEDULER] CHECK OUT REGISTERED FOR: " + checkOutTime);
     }
 
     public void stopScheduler() {
