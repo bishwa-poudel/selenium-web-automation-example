@@ -26,7 +26,7 @@ public class CheckInAction extends LisAutomateAction {
             System.out.println("Checking in to LIS Intranet");
 
             WebElement checkInButton = checkInContainer.get(0);
-//            checkInButton.click();
+            checkInButton.click();
 
             System.out.println("Successfully checked in");
         }

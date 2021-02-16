@@ -17,7 +17,7 @@ public class Playground extends TimerTask {
     public static void main(String[] args) {
         Timer timer = new Timer();
 //        TimerTask playgroundTask = new Playground();
-        System.out.println(DateUtils.getTimeOfDay(1, 18, 30, 0));
+        System.out.println(DateUtils.getNextSchedulingTime(1, 18, 30, 0));
     }
 
     @Override

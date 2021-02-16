@@ -10,7 +10,7 @@ import java.util.*;
  * Time: 17:59
  */
 public class TaskScheduler {
-    private final static int ONE_DAY = 1;
+    private final static int DAY_OFFSET = 1;
     private final static int CHECK_IN_HR = 9;
     private final static int CHECK_IN_OUT_MIN = 30;
     private final static int CHECK_IN_OUT_SEC = 0;
@@ -20,8 +20,8 @@ public class TaskScheduler {
     private final Timer timer = new Timer();
     private final TimerTask checkInTask = new CheckInTimer();
     private final TimerTask checkOutTask = new CheckOutTimer();
-    private final Date checkInTime = DateUtils.getTimeOfDay(ONE_DAY, CHECK_IN_HR, CHECK_IN_OUT_MIN, CHECK_IN_OUT_SEC);
-    private final Date checkOutTime = DateUtils.getTimeOfDay(ONE_DAY, CHECK_OUT_HR, CHECK_IN_OUT_MIN, CHECK_IN_OUT_SEC);
+    private final Date checkInTime = DateUtils.getNextSchedulingTime(DAY_OFFSET, CHECK_IN_HR, CHECK_IN_OUT_MIN, CHECK_IN_OUT_SEC);
+    private final Date checkOutTime = DateUtils.getNextSchedulingTime(DAY_OFFSET, CHECK_OUT_HR, CHECK_IN_OUT_MIN, CHECK_IN_OUT_SEC);
 
 
     public void initScheduler() {
