@@ -13,8 +13,10 @@ public abstract class IDriverManager {
     protected static WebDriver webDriver;
 
     public IDriverManager() {
-        this.setupDriver();
-        this.initDriver();
+        if(Objects.isNull(webDriver)) {
+            this.setupDriver();
+            this.initDriver();
+        }
     }
 
     public WebDriver getDriver() {
