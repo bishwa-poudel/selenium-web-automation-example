@@ -1,6 +1,6 @@
 package com.bishwa.project.lis.core.lisautomateactions;
 
-import com.bishwa.project.lis.core.specification.IWebDriver;
+import com.bishwa.project.lis.core.specification.IDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 15:58
  */
 public class CheckInAction extends LisAutomateAction {
-    public CheckInAction(IWebDriver webDriver) {
+    public CheckInAction(IDriverManager webDriver) {
         super(webDriver);
     }
 

@@ -1,9 +1,9 @@
 package com.bishwa.project.lis.service;
 
-import com.bishwa.project.lis.core.webdrivers.ChromeWebDriver;
 import com.bishwa.project.lis.core.lisautomateactions.LisAutomateAction;
 import com.bishwa.project.lis.core.lisautomateactions.CheckInAction;
 import com.bishwa.project.lis.core.lisautomateactions.CheckOutAction;
+import com.bishwa.project.lis.core.webdrivers.ChromeDriverManager;
 
 /**
  * Author: Bishwa
@@ -12,12 +12,12 @@ import com.bishwa.project.lis.core.lisautomateactions.CheckOutAction;
  */
 public class CheckInOutService {
     public void doCheckIn() {
-        LisAutomateAction checkInAction = new CheckInAction(new ChromeWebDriver());
+        LisAutomateAction checkInAction = new CheckInAction(new ChromeDriverManager());
         checkInAction.execute();
     }
 
     public void doCheckOut() {
-        LisAutomateAction checkOutAction = new CheckOutAction(new ChromeWebDriver());
+        LisAutomateAction checkOutAction = new CheckOutAction(new ChromeDriverManager());
         checkOutAction.execute();
     }
 }

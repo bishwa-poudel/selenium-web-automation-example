@@ -1,7 +1,7 @@
 package com.bishwa.project.lis.core.lisautomateactions;
 
 import com.bishwa.project.lis.core.specification.IAutomate;
-import com.bishwa.project.lis.core.specification.IWebDriver;
+import com.bishwa.project.lis.core.specification.IDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +19,7 @@ import java.util.List;
 public abstract class LisAutomateAction implements IAutomate {
     protected WebDriver driver;
 
-    public LisAutomateAction(IWebDriver webDriver) {
+    public LisAutomateAction(IDriverManager webDriver) {
         this.driver = webDriver.getDriver();
     }
 
