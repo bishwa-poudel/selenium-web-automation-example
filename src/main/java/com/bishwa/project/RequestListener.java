@@ -7,6 +7,7 @@ import com.bishwa.project.scheduler.TaskScheduler;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.TimeZone;
 
 /**
  * Author: Bishwa
@@ -19,6 +20,10 @@ public class RequestListener implements ServletContextListener {
 
     // initializing class will initialize static values once, thereby initializes chrome driver.
     private final IDriverManager driverManager = new ChromeDriverManager();
+
+    static {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kathmandu"));
+    }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

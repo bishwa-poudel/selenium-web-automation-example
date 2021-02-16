@@ -2,6 +2,7 @@ package com.bishwa.project.playground;
 
 import com.bishwa.project.Utils.DateUtils;
 
+import java.time.*;
 import java.util.*;
 
 /**
@@ -10,14 +11,32 @@ import java.util.*;
  * Time: 19:19
  */
 public class Playground extends TimerTask {
-//    static {
-//        System.setProperty("webdriver.chrome.driver", "C:\\apps\\webdriver\\bin\\chromedriver.exe");
-//    }
 
     public static void main(String[] args) {
-        Timer timer = new Timer();
-//        TimerTask playgroundTask = new Playground();
-        System.out.println(DateUtils.getNextSchedulingTime(1, 18, 30, 0));
+//        ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Asia/Kolkata"));
+//
+//        LocalDateTime currentDateTime = zonedDateTime.toLocalDateTime();
+//
+//        System.out.println(Date.from(currentDateTime.toInstant(ZoneOffset.of("+06:45"))));
+
+//        Clock clock = Clock.tick(Clock.system(ZoneId.of("Asia/Kolkata")), Duration.ofSeconds(1));
+//        LocalDateTime dateTime = LocalDateTime.now(clock);
+//
+//
+//        System.out.println(Date.from(dateTime.toInstant(ZoneOffset.of("+05:30"))));
+
+//        System.setProperty("user.timezone", "Asia/Kolkata");
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
+
+//        Instant currentTimeMilis = Instant.now();
+//
+//        ZoneId zoneId = ZoneId.of("Asia/Kolkata");
+//        ZonedDateTime zdt = ZonedDateTime.ofInstant(currentTimeMilis, zoneId);
+//
+//        System.out.println(zdt.toLocalDateTime());
+
+        System.out.println(LocalDateTime.now());
+
     }
 
     @Override
@@ -25,10 +44,4 @@ public class Playground extends TimerTask {
         System.out.println("Scheduled task");
     }
 
-    //    private static WebDriver getWebDriver() {
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless", "--window-size=1366,768");
-//
-//        return new ChromeDriver(options);
-//    }
 }
