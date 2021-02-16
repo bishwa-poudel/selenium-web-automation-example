@@ -38,7 +38,7 @@ public class CheckOutAction extends LisAutomateAction {
                 Alert checkOutConfirmationAlert = driver.switchTo().alert();
                 checkOutConfirmationAlert.accept();
 
-                System.out.println("Successfully checked out");
+                System.out.println("Successfully checked out at : " + System.currentTimeMillis());
             }
         }
     }

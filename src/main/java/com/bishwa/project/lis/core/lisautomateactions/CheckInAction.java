@@ -28,7 +28,7 @@ public class CheckInAction extends LisAutomateAction {
             WebElement checkInButton = checkInContainer.get(0);
             checkInButton.click();
 
-            System.out.println("Successfully checked in");
+            System.out.println("Successfully checked in at : " + System.currentTimeMillis());
         }
     }
 }
