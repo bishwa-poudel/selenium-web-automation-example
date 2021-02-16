@@ -1,28 +1,27 @@
 package com.bishwa.project.lis.core.webdrivers;
 
 import com.bishwa.project.lis.core.specification.IDriverManager;
-import org.openqa.selenium.WebDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
  * Author: Bishwa
- * Date: 30/01/2021
- * Time: 15:12
+ * Date: 16/02/2021
+ * Time: 10:14
  */
-public class ChromeWebDriver extends IDriverManager {
-    private static final String DRIVER_PATH = "C:\\apps\\webdriver\\bin\\chromedriver.exe";
+public class ChromeDriverManager extends IDriverManager {
 
     @Override
     protected void setupDriver() {
-        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
+        WebDriverManager.chromedriver().setup();
     }
 
     @Override
-    public void initDriver() {
+    protected void initDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless", "--window-size=1366,768");
 
-         webDriver = new ChromeDriver(options);
+        webDriver = new ChromeDriver(options);
     }
 }
