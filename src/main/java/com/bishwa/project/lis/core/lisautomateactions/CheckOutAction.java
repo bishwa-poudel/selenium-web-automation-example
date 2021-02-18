@@ -44,6 +44,6 @@ public class CheckOutAction extends LisAutomateAction {
 
                 logger.info("Successfully checked out at : " + System.currentTimeMillis());
             }
-        }
+        } else logger.error("Trying to check out without checked in");
     }
 }

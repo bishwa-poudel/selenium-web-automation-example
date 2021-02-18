@@ -1,31 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Don't forget to set system property -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+	to make all loggers asynchronous. -->
 <Configuration status="INFO">
+
+    <Properties>
+        <Property name="PATTERN">%d{HH:mm:ss.SSS} [%t] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} - %msg%n</Property>
+        <Property name="FS">${sys:file.separator}</Property>
+        <Property name="BASE_LOG_DIR">${FS}u01${FS}logs${FS}</Property>
+    </Properties>
+
     <Appenders>
-        <Console name="ConsoleAppender" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} - %msg%n" />
+        <!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" immediateFlush="false">
+            <PatternLayout pattern="${PATTERN}" />
         </Console>
 
 <!--        <File name="FileAppender" fileName="application-${date:yyyyMMdd}.log" immediateFlush="false" append="true">-->
 <!--            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>-->
 <!--        </File>-->
 
-        <RollingFile name="RollingFileAppender" fileName="logs/app.log"
-                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+        <RollingFile name="RollingFileAppender" fileName="${BASE_LOG_DIR}app.log"
+                     filePattern="${LOG_DIR}app-%d{MM-dd-yyyy}-%i.log">
             <PatternLayout>
-                <Pattern>%d [%t] %p %c - %m%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - [%F:%L] - %m%n%throwable</Pattern>
             </PatternLayout>
             <Policies>
-                <OnStartupTriggeringPolicy />
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="50 MB" />
+                <Policies>
+                    <!--Roll over when jvm starts-->
+                    <OnStartupTriggeringPolicy />
+                    <!--Roll over based on time. Interval 1 for daily roll over-->
+                    <!--Interval value specifies the increment in most specific part of date pattern-->
+                    <TimeBasedTriggeringPolicy interval="1" />
+                    <!--Roll over based on log file size-->
+                    <SizeBasedTriggeringPolicy size="50 MB" />
+                </Policies>
             </Policies>
-            <DefaultRolloverStrategy max="20" />
+            <DefaultRolloverStrategy max="20">
+                <Delete basePath="${BASE_LOG_DIR}" maxDepth="3">
+                    <IfFileName glob="*/app-*.log" />
+                    <!--Delete Logs older than 7 days-->
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="INFO">
+        <Root level="INFO" includeLocation="true">
             <AppenderRef ref="ConsoleAppender" />
-            <AppenderRef ref="FileAppender"/>
+<!--            <AppenderRef ref="FileAppender"/>-->
+            <AppenderRef ref="RollingFileAppender"/>
         </Root>
     </Loggers>
 </Configuration>

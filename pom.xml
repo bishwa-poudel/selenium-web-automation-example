@@ -75,6 +75,12 @@
       <version>2.14.0</version>
     </dependency>
 
+    <!-- Disruptor for async logging: https://mvnrepository.com/artifact/com.lmax/disruptor -->
+    <dependency>
+      <groupId>com.lmax</groupId>
+      <artifactId>disruptor</artifactId>
+      <version>3.4.2</version>
+    </dependency>
 
   </dependencies>
 
