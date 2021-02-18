@@ -5,7 +5,7 @@
 <Configuration status="INFO">
 
     <Properties>
-        <Property name="PATTERN">%d{HH:mm:ss.SSS} [%t] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} - %msg%n</Property>
+        <Property name="PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Property>
         <Property name="FS">${sys:file.separator}</Property>
         <Property name="BASE_LOG_DIR">${FS}u01${FS}logs${FS}</Property>
     </Properties>
@@ -46,10 +46,10 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="INFO" includeLocation="true">
+        <Root level="debug" includeLocation="true">
             <AppenderRef ref="ConsoleAppender" />
 <!--            <AppenderRef ref="FileAppender"/>-->
-            <AppenderRef ref="RollingFileAppender"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
         </Root>
     </Loggers>
 </Configuration>
