@@ -2,6 +2,7 @@ package com.bishwa.project.lis.core.lisautomateactions;
 
 import com.bishwa.project.lis.core.specification.IAutomate;
 import com.bishwa.project.lis.core.specification.IDriverManager;
+import com.bishwa.project.lis.properties.IntranetProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -23,8 +24,6 @@ public abstract class LisAutomateAction implements IAutomate {
 
     private static final String INTRANET_LOGIN_URL = "http://login.lisnepal.com.np/home/";
     private static final String INTRANET_HOME_URL = "http://login.lisnepal.com.np/home/login";
-    public static final String INTRANET_USERNAME = "bishwa.poudel";
-    public static final String INTRANET_PASSWORD = "LuPmDZ5RbUKaDBD";
 
     protected WebDriver driver;
 
@@ -49,8 +48,8 @@ public abstract class LisAutomateAction implements IAutomate {
         WebElement passwordField = driver.findElement(By.id("usr-password"));
         WebElement submitButton = driver.findElement(By.className("login-btn"));
 
-        userField.sendKeys(INTRANET_USERNAME);
-        passwordField.sendKeys(INTRANET_PASSWORD);
+        userField.sendKeys(IntranetProperties.INTRANET_USERNAME.val());
+        passwordField.sendKeys(IntranetProperties.INTRANET_PASSWORD.val());
         submitButton.click();
 
         driver.get(INTRANET_LOGIN_URL);
