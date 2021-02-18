@@ -1,6 +1,8 @@
 package com.bishwa.project.scheduler;
 
 import com.bishwa.project.Utils.DateUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
@@ -10,6 +12,8 @@ import java.util.*;
  * Time: 17:59
  */
 public class TaskScheduler {
+    private static final Logger logger = LogManager.getLogger(CheckOutTimer.class);
+
     private final static int DAY_OFFSET = 1;
     private final static int CHECK_IN_HR = 9;
     private final static int CHECK_IN_OUT_MIN = 30;
@@ -27,8 +31,9 @@ public class TaskScheduler {
     public void initScheduler() {
         timer.scheduleAtFixedRate(checkInTask, checkInTime, ONE_DAY_MILIS);
         timer.scheduleAtFixedRate(checkOutTask, checkOutTime, ONE_DAY_MILIS);
-        System.out.println("[TASK-SCHEDULER] CHECK IN REGISTERED FOR: " + checkInTime);
-        System.out.println("[TASK-SCHEDULER] CHECK OUT REGISTERED FOR: " + checkOutTime);
+
+        logger.info("[TASK-SCHEDULER] CHECK IN REGISTERED FOR: " + checkInTime);
+        logger.info("[TASK-SCHEDULER] CHECK OUT REGISTERED FOR: " + checkOutTime);
     }
 
     public void stopScheduler() {
@@ -38,7 +43,7 @@ public class TaskScheduler {
         timer.cancel(); // Terminates this timer, discarding any currently scheduled tasks.
         timer.purge();  // Removes all cancelled tasks from this timer's task queue.
 
-        System.out.println("[TASK-SCHEDULER] TASK SCHEDULER STOPPED SUCCESSFULLY");
+        logger.info("[TASK-SCHEDULER] TASK SCHEDULER STOPPED SUCCESSFULLY");
     }
 
 }

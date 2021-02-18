@@ -2,6 +2,8 @@ package com.bishwa.project.lis.core.lisautomateactions;
 
 import com.bishwa.project.lis.core.specification.IAutomate;
 import com.bishwa.project.lis.core.specification.IDriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,13 @@ import java.util.List;
  * Time: 15:11
  */
 public abstract class LisAutomateAction implements IAutomate {
+    private static final Logger logger = LogManager.getLogger(LisAutomateAction.class);
+
+    private static final String INTRANET_LOGIN_URL = "http://login.lisnepal.com.np/home/";
+    private static final String INTRANET_HOME_URL = "http://login.lisnepal.com.np/home/login";
+    public static final String INTRANET_USERNAME = "bishwa.poudel";
+    public static final String INTRANET_PASSWORD = "LuPmDZ5RbUKaDBD";
+
     protected WebDriver driver;
 
     public LisAutomateAction(IDriverManager webDriver) {
@@ -32,7 +41,7 @@ public abstract class LisAutomateAction implements IAutomate {
 
     protected void login() {
         if(checkIfLoggedIn()) {
-            System.out.println("Already logged in to LIS Intranet");
+            logger.info("Already logged in to LIS Intranet");
            return;
         }
 
@@ -40,20 +49,20 @@ public abstract class LisAutomateAction implements IAutomate {
         WebElement passwordField = driver.findElement(By.id("usr-password"));
         WebElement submitButton = driver.findElement(By.className("login-btn"));
 
-        userField.sendKeys("bishwa.poudel");
-        passwordField.sendKeys("LuPmDZ5RbUKaDBD");
+        userField.sendKeys(INTRANET_USERNAME);
+        passwordField.sendKeys(INTRANET_PASSWORD);
         submitButton.click();
 
-        driver.get("http://login.lisnepal.com.np/home/");
+        driver.get(INTRANET_LOGIN_URL);
 
         new WebDriverWait(driver, 1)
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.className("user-name-top"))));
 
-        System.out.println("Logged in to LIS Intranet");
+        logger.info("Logged in to LIS Intranet");
     }
 
     private boolean checkIfLoggedIn() {
-        driver.get("http://login.lisnepal.com.np/home/login");
+        driver.get(INTRANET_HOME_URL);
 
         List<WebElement> loggedInElements = driver.findElements(By.className("user-name-top"));
 
@@ -62,7 +71,7 @@ public abstract class LisAutomateAction implements IAutomate {
 
     @PreDestroy
     protected void close() {
-        System.out.println("Closing driver connection...");
+        logger.info("Closing driver connection...");
         driver.quit();
     }
 }

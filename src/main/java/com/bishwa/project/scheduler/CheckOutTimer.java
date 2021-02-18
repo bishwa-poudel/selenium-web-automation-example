@@ -1,6 +1,8 @@
 package com.bishwa.project.scheduler;
 
 import com.bishwa.project.lis.service.CheckInOutService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.TimerTask;
 
@@ -10,13 +12,15 @@ import java.util.TimerTask;
  * Time: 18:54
  */
 public class CheckOutTimer extends TimerTask {
+    private static final Logger logger = LogManager.getLogger(CheckOutTimer.class);
+
     @Override
     public void run() {
         try {
-            System.out.println("[CHECKOUT-TIMER] Check Out LIS Intranet Triggered at : " + System.currentTimeMillis());
+            logger.info("[CHECKOUT-TIMER] Check Out LIS Intranet Triggered at : " + System.currentTimeMillis());
             new CheckInOutService().doCheckOut();
         } catch (Exception e) {
-            System.out.println("[CHECKOUT-TIMER] Exception running Check Out Timer");
+            logger.error("[CHECKOUT-TIMER] Exception running Check Out Timer");
             e.printStackTrace();
         }
 

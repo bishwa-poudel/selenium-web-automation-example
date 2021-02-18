@@ -1,6 +1,8 @@
 package com.bishwa.project.lis.core.lisautomateactions;
 
 import com.bishwa.project.lis.core.specification.IDriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,6 +17,8 @@ import java.util.List;
  * Time: 15:58
  */
 public class CheckOutAction extends LisAutomateAction {
+    private static final Logger logger = LogManager.getLogger(CheckOutAction.class);
+
     public CheckOutAction(IDriverManager webDriver) {
         super(webDriver);
     }
@@ -26,9 +30,9 @@ public class CheckOutAction extends LisAutomateAction {
 
         if (isCheckedIn) {
             List<WebElement> checkOutContainer = driver.findElements(By.id("check_out"));
-            if (checkOutContainer.isEmpty()) System.out.println("Already checked out of Intranet");
+            if (checkOutContainer.isEmpty()) logger.info("Already checked out of Intranet");
             else {
-                System.out.println("Checking out from LIS Intranet");
+                logger.info("Checking out from LIS Intranet");
 
                 WebElement checkOutButton = checkOutContainer.get(0);
                 checkOutButton.click();
@@ -38,7 +42,7 @@ public class CheckOutAction extends LisAutomateAction {
                 Alert checkOutConfirmationAlert = driver.switchTo().alert();
                 checkOutConfirmationAlert.accept();
 
-                System.out.println("Successfully checked out at : " + System.currentTimeMillis());
+                logger.info("Successfully checked out at : " + System.currentTimeMillis());
             }
         }
     }
