@@ -98,3 +98,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# Project specific properties file
+!/src/main/resources-filtered/intranet.properties
