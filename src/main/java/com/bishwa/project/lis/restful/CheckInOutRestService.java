@@ -16,6 +16,14 @@ import javax.ws.rs.core.Response;
 @Path("/action")
 public class CheckInOutRestService {
     @GET
+    @Path("login")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login() {
+        new CheckInOutService().doLogin();
+        return Response.status(Response.Status.OK).entity("Check in successful").build();
+    }
+
+    @GET
     @Path("checkin")
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkIn() {

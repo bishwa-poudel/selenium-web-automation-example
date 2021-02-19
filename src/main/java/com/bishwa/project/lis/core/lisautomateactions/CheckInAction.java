@@ -27,7 +27,7 @@ public class CheckInAction extends LisAutomateAction {
 
         if(isCheckedIn) logger.info("Already checked in");
         else {
-            logger.info("Checking in to LIS Intranet");
+            logger.info("Checking in to Intranet");
 
             WebElement checkInButton = checkInContainer.get(0);
             checkInButton.click();

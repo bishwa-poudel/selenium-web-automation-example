@@ -6,6 +6,7 @@ import com.bishwa.project.lis.properties.IntranetProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,8 +23,7 @@ import java.util.List;
 public abstract class LisAutomateAction implements IAutomate {
     private static final Logger logger = LogManager.getLogger(LisAutomateAction.class);
 
-    private static final String INTRANET_LOGIN_URL = "http://login.lisnepal.com.np/home/";
-    private static final String INTRANET_HOME_URL = "http://login.lisnepal.com.np/home/login";
+    private static final String INTRANET_HOME_URL = "http://login.lisnepal.com.np/home";
 
     protected WebDriver driver;
 
@@ -39,9 +39,11 @@ public abstract class LisAutomateAction implements IAutomate {
     protected abstract void action();
 
     protected void login() {
+        logger.info("Logging in to Intranet");
+
         if(checkIfLoggedIn()) {
-            logger.info("Already logged in to LIS Intranet");
-           return;
+            logger.info("Already logged in to Intranet");
+            return;
         }
 
         WebElement userField = driver.findElement(By.id("usr-name"));
@@ -52,23 +54,27 @@ public abstract class LisAutomateAction implements IAutomate {
         passwordField.sendKeys(IntranetProperties.INTRANET_PASSWORD.val());
         submitButton.click();
 
-        driver.get(INTRANET_LOGIN_URL);
+        driver.get(INTRANET_HOME_URL);
 
         new WebDriverWait(driver, 1)
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.className("user-name-top"))));
 
-        logger.info("Logged in to LIS Intranet");
+        logger.info("Logged in to Intranet");
     }
 
     private boolean checkIfLoggedIn() {
         driver.get(INTRANET_HOME_URL);
 
         new WebDriverWait(driver, 1)
-                .until(ExpectedConditions.visibilityOf(driver.findElement(By.className("user-name-top"))));
+                .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("logo-img"))));
 
-        List<WebElement> loggedInElements = driver.findElements(By.className("user-name-top"));
+        try {
+            List<WebElement> loggedInElements = driver.findElements(By.className("user-name-top"));
 
-        return !loggedInElements.isEmpty();
+            return !loggedInElements.isEmpty();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     @PreDestroy

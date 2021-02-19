@@ -17,7 +17,7 @@ public class CheckOutTimer extends TimerTask {
     @Override
     public void run() {
         try {
-            logger.info("[CHECKOUT-TIMER] Check Out LIS Intranet Triggered at : " + System.currentTimeMillis());
+            logger.info("[CHECKOUT-TIMER] Check Out Intranet Triggered at : " + System.currentTimeMillis());
             new CheckInOutService().doCheckOut();
         } catch (Exception e) {
             logger.error("[CHECKOUT-TIMER] Exception running Check Out Timer");

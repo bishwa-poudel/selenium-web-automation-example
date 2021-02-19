@@ -32,7 +32,7 @@ public class CheckOutAction extends LisAutomateAction {
             List<WebElement> checkOutContainer = driver.findElements(By.id("check_out"));
             if (checkOutContainer.isEmpty()) logger.info("Already checked out of Intranet");
             else {
-                logger.info("Checking out from LIS Intranet");
+                logger.info("Checking out from Intranet");
 
                 WebElement checkOutButton = checkOutContainer.get(0);
                 checkOutButton.click();
