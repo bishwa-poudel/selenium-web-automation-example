@@ -63,6 +63,9 @@ public abstract class LisAutomateAction implements IAutomate {
     private boolean checkIfLoggedIn() {
         driver.get(INTRANET_HOME_URL);
 
+        new WebDriverWait(driver, 1)
+                .until(ExpectedConditions.visibilityOf(driver.findElement(By.className("user-name-top"))));
+
         List<WebElement> loggedInElements = driver.findElements(By.className("user-name-top"));
 
         return !loggedInElements.isEmpty();
