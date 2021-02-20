@@ -20,7 +20,7 @@ public class CheckInOutRestService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login() {
         new CheckInOutService().doLogin();
-        return Response.status(Response.Status.OK).entity("Check in successful").build();
+        return Response.status(Response.Status.OK).entity("Login successful").build();
     }
 
     @GET
