@@ -66,9 +66,9 @@ mvn clean install
 
 ![image](https://user-images.githubusercontent.com/16562819/108626213-270c9b80-7477-11eb-8988-d36f9f60f0fc.png)
 
-* Once you see this message in the console, your build is ready. Goto {target/lis-intranet-automation.war} to get the archived file.
+* Once you see this message in the console, your build is ready. Goto `target/lis-intranet-automation.war}` to get the archived file.
 
-_Note: I have used WAR for packaging. If you want to build into the jar file, change the <packaging> inside pom.xml file to jar._
+_Note: I have used WAR for packaging. If you want to build into the jar file, change the `<packaging>` inside pom.xml file to jar._
 
 ```
  <packaging>jar</packaging>
