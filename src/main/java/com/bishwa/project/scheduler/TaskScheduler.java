@@ -6,6 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
+import static com.bishwa.project.scheduler.ScheduleConstants.*;
+
+
 /**
  * Author: Bishwa
  * Date: 30/01/2021
@@ -14,21 +17,28 @@ import java.util.*;
 public class TaskScheduler {
     private static final Logger logger = LogManager.getLogger(CheckOutTimer.class);
 
-    private final static int DAY_OFFSET = 1;
-    private final static int CHECK_IN_HR = 9;
-    private final static int CHECK_IN_OUT_MIN = 30;
-    private final static int CHECK_IN_OUT_SEC = 0;
-    private final static int CHECK_OUT_HR = 17;
-    private final static long ONE_DAY_MILIS = 60*60*24*1000;
+    private static Timer timer;
+    private static TimerTask checkInTask;
+    private static TimerTask checkOutTask;
+    private static Date checkInTime;
+    private static Date checkOutTime;
 
-    private final Timer timer = new Timer();
-    private final TimerTask checkInTask = new CheckInTimer();
-    private final TimerTask checkOutTask = new CheckOutTimer();
-    private final Date checkInTime = DateUtils.getNextSchedulingTime(DAY_OFFSET, CHECK_IN_HR, CHECK_IN_OUT_MIN, CHECK_IN_OUT_SEC);
-    private final Date checkOutTime = DateUtils.getNextSchedulingTime(DAY_OFFSET, CHECK_OUT_HR, CHECK_IN_OUT_MIN, CHECK_IN_OUT_SEC);
+    private static void initTimer() {
+        timer = new Timer();
+        checkInTask = new CheckInTimer();
+        checkOutTask = new CheckOutTimer();
+    }
 
+    private static void setTimer(Boolean skip) {
+        Calendar initDate = new GregorianCalendar();
 
-    public void initScheduler() {
+        if(skip) initDate.add(Calendar.DATE, 1);
+
+        checkInTime = DateUtils.getNextSchedulingTime(initDate, DAY_OFFSET, CHECK_IN_HR, CHECK_IN_OUT_MIN, CHECK_IN_OUT_SEC);
+        checkOutTime = DateUtils.getNextSchedulingTime(initDate, DAY_OFFSET, CHECK_OUT_HR, CHECK_IN_OUT_MIN, CHECK_IN_OUT_SEC);
+    }
+
+    private static void initScheduler() {
         timer.scheduleAtFixedRate(checkInTask, checkInTime, ONE_DAY_MILIS);
         timer.scheduleAtFixedRate(checkOutTask, checkOutTime, ONE_DAY_MILIS);
 
@@ -36,7 +46,21 @@ public class TaskScheduler {
         logger.info("[TASK-SCHEDULER] CHECK OUT REGISTERED FOR: " + checkOutTime);
     }
 
-    public void stopScheduler() {
+    public static void scheduleTimer() {
+        initTimer();
+        setTimer(false);
+        initScheduler();
+    }
+
+    public static void rescheduleTimer() {
+        stopScheduler();
+
+        initTimer();
+        setTimer(true);
+        initScheduler();
+    }
+
+    public static void stopScheduler() {
         checkInTask.cancel();
         checkOutTask.cancel();
 

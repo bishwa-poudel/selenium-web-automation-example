@@ -1,6 +1,7 @@
 package com.bishwa.project.lis.restful;
 
 import com.bishwa.project.lis.service.CheckInOutService;
+import com.bishwa.project.scheduler.TaskScheduler;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -37,5 +38,13 @@ public class CheckInOutRestService {
     public Response checkOut() {
         new CheckInOutService().doCheckOut();
         return Response.status(Response.Status.OK).entity("Check out successful").build();
+    }
+
+    @GET
+    @Path("skip")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response skipCurrentDay() {
+        TaskScheduler.rescheduleTimer();
+        return Response.status(Response.Status.OK).entity("Skipped current day").build();
     }
 }

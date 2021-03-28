@@ -3,6 +3,7 @@ package com.bishwa.project.Utils;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 /**
  * Author: Bishwa
@@ -10,9 +11,8 @@ import java.util.GregorianCalendar;
  * Time: 18:47
  */
 public class DateUtils {
-    public static Date getNextSchedulingTime(int dayOffset, int hr, int min, int s) {
-        Calendar currentDate = new GregorianCalendar();
-        Calendar nextWorkingDay = handleOffDay(new GregorianCalendar());
+    public static Date getNextSchedulingTime(Calendar initDate, int dayOffset, int hr, int min, int s) {
+        Calendar nextWorkingDay = handleOffDay(initDate);
 
         Calendar nextScheduledDate  = new GregorianCalendar(
             nextWorkingDay.get(Calendar.YEAR),
@@ -23,7 +23,7 @@ public class DateUtils {
             s
         );
 
-        if(currentDate.before(nextScheduledDate)) return nextScheduledDate.getTime();
+        if(initDate.before(nextScheduledDate)) return nextScheduledDate.getTime();
 
         nextScheduledDate.add(Calendar.DATE, dayOffset);
 

@@ -21,8 +21,6 @@ import java.util.TimeZone;
 public class RequestListener implements ServletContextListener {
     private static final Logger logger = LogManager.getLogger(CheckOutTimer.class);
 
-    private final TaskScheduler taskScheduler = new TaskScheduler();
-
     // initializing class will initialize static values once, thereby initializes chrome driver.
     private final IDriverManager driverManager = new ChromeDriverManager();
 
@@ -35,14 +33,14 @@ public class RequestListener implements ServletContextListener {
         logger.info("SERVER STARTED SUCCESSFULLY");
         logger.info("RUNNING POST DEPLOYMENT HOOKS");
 
-        taskScheduler.initScheduler();
+        TaskScheduler.scheduleTimer();
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         logger.info("[CONTEXT-DESTROYED] SERVER STOP SIGNAL RECEIVED");
 
-        taskScheduler.stopScheduler();
+        TaskScheduler.stopScheduler();
         driverManager.tearDown();
     }
 }
