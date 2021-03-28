@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
  */
 public class DateUtils {
     public static Date getNextSchedulingTime(int dayOffset, int hr, int min, int s) {
+        Calendar currentDate = new GregorianCalendar();
         Calendar nextWorkingDay = handleOffDay(new GregorianCalendar());
 
         Calendar nextScheduledDate  = new GregorianCalendar(
@@ -22,7 +23,7 @@ public class DateUtils {
             s
         );
 
-        if(nextWorkingDay.before(nextScheduledDate)) return nextScheduledDate.getTime();
+        if(currentDate.before(nextScheduledDate)) return nextScheduledDate.getTime();
 
         nextScheduledDate.add(Calendar.DATE, dayOffset);
 
