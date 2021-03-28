@@ -11,20 +11,30 @@ import java.util.GregorianCalendar;
  */
 public class DateUtils {
     public static Date getNextSchedulingTime(int dayOffset, int hr, int min, int s) {
-        Calendar currentDate = new GregorianCalendar();
-        Calendar todayScheduledDate  = new GregorianCalendar(
-                currentDate.get(Calendar.YEAR),
-                currentDate.get(Calendar.MONTH),
-                currentDate.get(Calendar.DATE),
-                hr,
-                min,
-                s
-                );
+        Calendar nextWorkingDay = handleOffDay(new GregorianCalendar());
 
-        if(currentDate.before(todayScheduledDate)) return todayScheduledDate.getTime();
+        Calendar nextScheduledDate  = new GregorianCalendar(
+            nextWorkingDay.get(Calendar.YEAR),
+            nextWorkingDay.get(Calendar.MONTH),
+            nextWorkingDay.get(Calendar.DATE),
+            hr,
+            min,
+            s
+        );
 
-        todayScheduledDate.add(Calendar.DATE, dayOffset);
+        if(nextWorkingDay.before(nextScheduledDate)) return nextScheduledDate.getTime();
 
-        return todayScheduledDate.getTime();
+        nextScheduledDate.add(Calendar.DATE, dayOffset);
+
+        return handleOffDay(nextScheduledDate).getTime();
+    }
+
+    private static Calendar handleOffDay(Calendar calendar) {
+        if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+            calendar.add(Calendar.DATE, 1);
+            return calendar;
+        }
+
+        return calendar;
     }
 }
